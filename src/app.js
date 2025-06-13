@@ -4,7 +4,7 @@ const session = require("express-session");
 const path = require("path");
 const conn=require("./config/db.js");
 const mysql=require("mysql2");
-const router = require("../src/routes/regrouts.js");
+const router = require("../src/routes/regRouts.js");
 
 const app = express();
 app.set("view engine", "ejs");
