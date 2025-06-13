@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <style>
+    body 
+    {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    .content 
+    {
+      margin-left: 200px;
+      padding: 40px;
+      display: flex;
+      gap: 20px;
+      margin-top: -360px;; 
+    }
+    .box 
+    {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      flex: 1;
+    }
+    .styled-table 
+    {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 16px;
+      min-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .styled-table thead tr 
+    {
+      background-color: #343a40;
+      color: #ffffff;
+      text-align: left;
+    }
+    .styled-table th,
+    .styled-table td 
+    {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+    }
+    .styled-table tbody tr 
+    {
+      background-color: #f9f9f9;
+    }
+    .styled-table tbody tr:hover 
+    {
+      background-color: #f1f1f1;
+    }
+    .update-link,
+    .delete-link 
+    {
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .update-link 
+    {
+      color: #007bff;
+    }
+    .delete-link 
+    {
+     color: #dc3545;
+    }
+    .add-exam-form input[type="text"] 
+    {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0 10px 0;
+      margin-right: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .add-exam-form button 
+    {
+      background-color: #ffc107;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <%- include("dashboard.ejs") %>
+    <div class="content">
+    <div class="box">
+     <h2>Exam List</h2>
+    <table class="styled-table">
+  <thead>
+    <tr>
+      <th>Exam ID</th>
+      <th>Exam Name</th>
+      <th>Total Marks</th>
+      <th>Passing Marks</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% exams.forEach(exam => { %>
+      <tr>
+        <td><%= exam.ex_id %></td>
+        <td><%= exam.exname %></td>
+        <td><%= exam.totalmark %></td>
+        <td><%= exam.passingmark %></td>
+        <td><a href="/updatexam/<%= exam.ex_id %>" class="update-link">Update</a></td>
+        <td><a href="/deletexam/<%= exam.ex_id %>" class="delete-link">Delete</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+    </div>
+    <div class="box add-exam-form">
+        <h2> Exam Form</h2>
+        <form name="frm" action="/addexam" method="POST">
+            <input type="text" name="exname" value="" placeholder="Enter Exam Name" class="control"/><br><br> 
+            <input type="text" name="totalmark" value="" placeholder="Enter Total Marks" class="control"/><br><br> 
+            <input type="text" name="passingmark" value="" placeholder="Enter Passing Marks" class="control"/><br><br> 
+            <button type="submit">Submit Exam</button>
+        </form>
+    </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Exam</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <%- include ("dashboard.ejs") %>
+    <div class="log">
+    <h2>Update Exam</h2>
+    <form action="/updatexam/<%= exam.ex_id %>" method="POST">
+        <label>Exam Name:</label>
+        <input type="text" name="exname" value="<%= exam.exname %>" required><br><br>
+
+        <label>Total Marks:</label>
+        <input type="number" name="totalmark" value="<%= exam.totalmark %>" required><br><br>
+
+        <label>Passing Marks:</label>
+        <input type="number" name="passingmark" value="<%= exam.passingmark %>" required><br><br>
+
+        <button type="submit">Update Exam</button>
+    </form>
+    </div>
+</body>
+</html>
