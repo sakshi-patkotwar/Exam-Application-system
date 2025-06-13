@@ -101,3 +101,12 @@ input
   background-color: #444;
   cursor: pointer;
 }
+.exam
+{
+    width: 490px;
+    height:290px;
+    background-color: rgb(155, 144, 165);
+    margin-top: -340px;
+    margin-left: 450px;
+    border-radius: 10px;  
+}

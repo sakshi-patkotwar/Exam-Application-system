@@ -84,7 +84,69 @@ exports.admin=(req,res)=>{
             console.error("Error fetching admin data:", err);
             return res.status(500).send("Server error");
         }
-        res.render("admin.ejs", { admin: results }); // ✅ pass admin data to view
+        res.render("admin.ejs", { admin: results }); 
+    });
+};
+
+exports.addexam=(req,res)=>{
+    const query="select * from exam";
+    db.query(query,(err,results)=>{
+        if(err)
+        {
+            console.error("Error Fetching exams:",err);
+            return res.status(500).send("Error fetching exams");
+        }
+        res.render("exam.ejs", {exams:results});
+    });
+};
+
+exports.insertexam=(req,res)=>{
+    const {exname,totalmark,passingmark}=req.body;
+    const query="insert into exam (exname,totalmark,passingmark) values (?,?,?)";
+    db.query(query,[exname,totalmark,passingmark],(err,result)=>{
+        if(err)
+        {
+            console.error("Error fetching exams:",err);
+            return res.status(500).send("Error fetching exams");
+        }
+        res.redirect("/exam");
+    });
+};
+
+exports.deletexam=(req,res)=>{
+    const {ex_id}=req.params;
+    const query="delete from exam where ex_id=?";
+    db.query(query,[ex_id],(err,result)=>{
+        if(err){
+            console.error("Error deleting exams:",err);
+            return res.status(500).send("Failed to delete exam");
+        }
+        res.redirect("/exam");
+    });
+};
+
+exports.getUpdateExamForm = (req, res) => {
+    const { ex_id } = req.params;
+    const query = "SELECT * FROM exam WHERE ex_id = ?";
+    db.query(query, [ex_id], (err, results) => {
+        if (err) {
+            console.error("Error fetching exam:", err);
+            return res.status(500).send("Failed to fetch exam data");
+        }
+        res.render("updatexam.ejs", { exam: results[0] }); // create this view
+    });
+};
+
+exports.updatexam=(req,res)=>{
+    const {ex_id}=req.params;
+    const {exname,totalmark,passingmark}=req.body;
+    const query="update exam set exname=? , totalmark=? , passingmark=? where ex_id=?";
+    db.query(query,[exname,totalmark,passingmark.ex_id],(err,result)=>{
+        if(err){
+        console.error("Error Fetching exams",err);
+        return res.status(500).send("Failed to Update exam data");
+        }
+    res.redirect("/exam");
     });
 };
 
