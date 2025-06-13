@@ -12,6 +12,4 @@ router.post("/addcourse",regCtrl.insertcourse);
 router.get("/addcourse",regCtrl.deletesubject);
 router.get("/deletecourse/:cid",regCtrl.deletesubject);
 router.get("/adminadd",regCtrl.admin);
-router.get("/studentlogin",regCtrl.studentlog);
-router.post("/studentlogin",regCtrl.studentRegister);
 module.exports = router;
