@@ -1,19 +1,28 @@
-let express=require("express");
-let bodyparser=require("body-parser");
-let session=require("express-session");
-let router=require("../src/routes/regrouts.js");
-let conn=require("./config/db.js");
-let app=express();
+const express = require("express");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const path = require("path");
+const conn=require("./config/db.js");
+const mysql=require("mysql2");
+const router = require("../src/routes/regrouts.js");
 
-app.use(bodyparser.urlencoded({extended:true}));
-app.use(bodyparser.json());
-app.use(session({
-    secret:"11111111fdf",
-    resave:false,
-    saveUninitialized:false
-}));
-app.use("/",router);
-app.set('view engine','ejs');
+const app = express();
+app.set("view engine", "ejs");
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(
+  session({
+    secret: "11111111fdf",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(express.static("public"));
 
-module.exports=app;
+// Routes
+app.use("/", router);
+
+module.exports = app;
