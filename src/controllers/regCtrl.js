@@ -132,7 +132,7 @@ exports.admin=(req,res)=>{
             console.error("Error fetching admin data:", err);
             return res.status(500).send("Server error");
         }
-        res.render("admin.ejs", { admin: results }); // ✅ pass admin data to view
+        res.render("admin.ejs", { admin: results }); 
     });
 };
 
@@ -142,4 +142,5 @@ exports.adminlogout=(req,res)=>{
         res.redirect("/adminlogin");
     });
 };
+
 
