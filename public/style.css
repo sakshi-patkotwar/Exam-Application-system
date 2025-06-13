@@ -9,11 +9,38 @@ body
     width: 219vh;
     height:55vh;
 }
+ul{
+    width:100%;
+    height:20px;
+    background-color: teal;
+    color: aliceblue;
+    padding: 20px;
+    margin-left:-5px;
+}
+ul li{
+    display: inline;
+    padding:20px;
+}
+ul li a{
+    text-decoration: none;
+    color: aliceblue;
+}
 .title {
   margin-left: 300; 
   font-size: large;
   font-weight: bold;
   color: white;
+}
+body
+{
+    background-image: url(laptop.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    width: 220vh;
+    height:55vh;
 }
 .log
 {
@@ -24,6 +51,22 @@ body
     margin-left: 450px;
     border-radius: 10px;   
 }
+h1
+{
+    width:400px;
+    height:35px;
+    margin-left: 140px;
+}
+input
+{
+    width:390px;
+    height:25px;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-left: 28px;
+    border-radius: 10px;
+    background-color: rgb(188, 212, 233);
+}
 /* .navbar 
 {  
   background-color: #4CAF50;
@@ -33,6 +76,7 @@ body
   text-align: center;
   font-weight: bold;
   height: 60px;
+  width: 228vh;
 } */
 
 .container {
