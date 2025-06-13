@@ -1,7 +1,7 @@
 let express=require("express");
 let bodyparser=require("body-parser");
 let session=require("express-session");
-let router=require("../src/routes/regRouts.js");
+let router=require("./routes/regRouts.js");
 let conn=require("./config/db.js");
 let app=express();
 
