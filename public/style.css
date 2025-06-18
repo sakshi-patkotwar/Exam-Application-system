@@ -1,14 +1,15 @@
 body
 {
-    background-image: url(laptop.jpeg);
+    background: url(laptop.jpeg)no-repeat center center fixed;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     margin: 0;
     padding: 0;
-    width: 219vh;
+    width: 200vh;
     height:55vh;
 }
+
 ul{
     width:100%;
     height:20px;
@@ -30,17 +31,6 @@ ul li a{
   font-size: large;
   font-weight: bold;
   color: white;
-}
-body
-{
-    background-image: url(laptop.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    width: 220vh;
-    height:55vh;
 }
 .log
 {
@@ -79,10 +69,10 @@ input
   width: 228vh;
 } */
 
-.container {
+ .container {
   display: flex;
-  height: 55vh ;
-}
+  height: 2vh ;
+} 
 
 .sidebar {
   width: 220px;
@@ -116,7 +106,7 @@ input
     width: 490px;
     height:290px;
     background-color: rgb(155, 144, 165);
-    margin-top: -340px;
+    /* margin-top: -340px; */
     margin-left: 450px;
     border-radius: 10px;  
 }
@@ -157,7 +147,6 @@ input
     width: 380px;
     height:400px;
     background-color: rgb(155, 144, 165);
-    margin-top: -300px;
     margin-left: 450px;
     border-radius: 10px;   
 }

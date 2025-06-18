@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Schedule</title>
+    <style>
+        body {
+            background-image: url("/laptop.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            width: 200vh;
+            height:55vh;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            background-color: #ccc;
+            border-radius: 8px;
+            padding-left: 30px;
+            margin-left: 50px;
+        }
+        form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            padding: 8px;
+            width: 100%;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            background: #28a745;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Schedule</h1>
+    <form method="POST" action="/schedule/update/<%= schedule.schid %>">
+        <label>Date:</label>
+        <input type="date" name="date" value="<%= schedule.date.toISOString().substring(0,10) %>" required>
+
+        <label>Start Time:</label>
+        <input type="time" name="starttime" value="<%= schedule.starttime %>" required>
+
+        <label>End Time:</label>
+        <input type="time" name="endtime" value="<%= schedule.endtime %>" required>
+
+        <label>Course:</label>
+        <select name="cid" required>
+            <% subjects.forEach(course => { %>
+                <option value="<%= course.cid %>" <%= schedule.cid === course.cid ? 'selected' : '' %>><%= course.cname %></option>
+            <% }) %>
+        </select>
+
+        <label>Exam:</label>
+        <select name="ex_id" required>
+            <% exams.forEach(exam => { %>
+                <option value="<%= exam.ex_id %>" <%= schedule.ex_id === exam.ex_id ? 'selected' : '' %>><%= exam.exname %></option>
+            <% }) %>
+        </select>
+        <button type="submit">Update Schedule</button>
+    </form>
+    <a href="/schedule">← Back to Schedule List</a>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin</title>
     <style>
         body {
       margin: 0;
@@ -15,7 +15,6 @@
       padding: 40px;
       display: flex;
       gap: 20px;
-      margin-top: -360px;; 
     }
     .box {
       background-color: white;
@@ -56,7 +55,7 @@
           <td class="admin-action">
             <span><%= admin.aname %></span><th>
             <span><%= admin.apassword %></span>
-            <form action="adminadd" method="GET" style="display: inline;">
+            <!-- <form action="adminadd" method="GET" style="display: inline;"> -->
               <input type="hidden" name="adm_id" value="<%= admin.adm_id %>"><th>
               <input type="hidden" name="aname" value="<%= admin.aname %>"><th>
               <input type="hidden" name="apassword" value="<%= admin.apassword %>"><th>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+    <style>
+        body 
+        {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #edf2f7;
+            color: #333;
+        }
+        .contain 
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 10px;
+            margin-top: 27px;
+            margin-left: 230px;
+            gap: 20px;
+        }
+        .contain h3
+        {
+            text-align: center;
+        }
+        form 
+        {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            height: auto;
+            max-width: 500px;
+        }
+        table 
+        {
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px #0003;
+            margin-top: 0;
+            margin-left: 0;
+            width:600px;
+        }
+        form div 
+        {
+            margin-bottom: 2.5px;
+        }
+        label 
+        {
+            display: block;
+            font-weight: bold;
+            color: #4a5568;
+        }
+        input 
+        {
+            width: 93%;
+            padding: 5px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            background: #edf2f7;
+        }
+       .input-style 
+       {
+            width: 91%;
+            padding: 0px;
+            border-radius: 10px;
+            border: none;
+            background-color: #cde1f9;
+            font-size: 16px;
+            margin-bottom: 10px;
+            margin-left: 27px;
+            resize: vertical; 
+        }
+        button 
+        {
+            padding: 10px 20px;
+            background: #3182ce;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover 
+        {
+            background: #2b6cb0;
+        }
+        .quest
+        {
+            flex: 1;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+        .quest h3
+        {
+            margin-left: 20px;
+            text-align: center;
+        }
+        th, td 
+        {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width:500px;
+        }
+        form.delete-form 
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+       }
+        form.delete-form button 
+        {
+            background: #e53e3e;
+        }
+        form.delete-form button:hover 
+        {
+            background: #c53030;
+        }
+    </style>
+</head>
+<body>
+    <%- include("dashboard.ejs") %>
+    <div class="contain">
+        <form action="/questions/add" method="POST">
+            <h3>Add New Question</h3>
+            <div>
+                <label>Question</label>
+                <textarea name="qname" class="input-style" rows="3" placeholder="enter question"></textarea>
+            </div>
+            <div>
+                <label>Option 1</label>
+                <input type="text" name="op1" required>
+            </div>
+            <div>
+                <label>Option 2</label>
+                <input type="text" name="op2" required>
+            </div>
+            <div>
+                <label>Option 3</label>
+                <input type="text" name="op3" required>
+            </div>
+            <div>
+                <label>Option 4</label>
+                <input type="text" name="op4" required>
+            </div>
+            <div>
+                <label>Correct Answer (Option Number)</label>
+                <input type="number" name="answer" min="1" max="4" placeholder="enter correct answer option" required>
+            </div>
+            <div>
+            <label>Select Course</label>
+            <select name="course_id">
+                <% subjects.forEach(course => { %>
+                    <option value="<%= course.cid %>"><%= course.cname %></option>
+                <% }); %>
+            </select>
+            </div>
+            <button type="submit">Save Question</button>
+        </form>
+        <div class="quest">
+        <h3>Question List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>Course</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% questions.forEach((question, index) => { %>
+                    <tr>
+                        <th><%= index+1 %></th>
+                        <th><%= question.qname %> | 1.<%= question.op1 %> |  2.<%= question.op2 %> |  3.<%= question.op3 %> |  4.<%= question.op4 %> </th>
+                        <th><%= question.answer %></th>
+                        <th><%= question.cname %></th>
+                        <td>
+                            <a href="/questions/delete/<%= question.qid %>">
+                               <button type="submit">Delete</button>
+                            </a>                                
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
