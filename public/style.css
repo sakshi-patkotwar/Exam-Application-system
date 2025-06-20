@@ -1,6 +1,6 @@
 body
 {
-    background-image: url(laptop.jpeg);
+    background: url(laptop.jpeg)no-repeat center center fixed;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -31,7 +31,7 @@ ul li a{
   font-weight: bold;
   color: white;
 }
-body
+/* body
 {
     background-image: url(laptop.jpg);
     background-size: cover;
@@ -41,47 +41,62 @@ body
     padding: 0;
     width: 220vh;
     height:55vh;
-}
-.log
-{
-    width: 490px;
-    height:240px;
-    background-color: rgb(155, 144, 165);
-    margin-top: 100px;
-    margin-left: 450px;
-    border-radius: 10px;   
-}
-h1
-{
-    width:400px;
-    height:35px;
-    margin-left: 140px;
-}
-input
-{
-    width:390px;
-    height:25px;
-    border-radius: 5px;
-    margin-top: 15px;
-    margin-left: 28px;
-    border-radius: 10px;
-    background-color: rgb(188, 212, 233);
-}
-/* .navbar 
-{  
-  background-color: #4CAF50;
-  display: flex;         
-  justify-content:center;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  height: 60px;
-  width: 228vh;
 } */
+
+.log {
+    width: 350px;
+    background: #ffffff;
+    margin: 100px auto;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px #0003;
+    font-family: Arial, sans-serif;
+}
+
+.log h1 {
+    text-align:center;
+    margin-bottom: 20px;
+    color: #000;
+    margin-left: -30px;
+    margin-top: 10px ;
+    font-size: 25px;
+}
+
+.log label {
+    display: block;
+    margin-bottom: 0px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #edf3fa;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.input.submit {
+    background: #4CAF50;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.input.submit:hover {
+    background: #45a049;
+}
+
 
 .container {
   display: flex;
-  height: 55vh ;
+  height: 5vh ;
 }
 
 .sidebar {
@@ -139,16 +154,76 @@ input
     height:25px;
     border-radius: 5px;
     margin-top: 15px;
-    margin-left: 28px;
+    margin-left: 30px;
     border-radius: 10px;
     background-color: rgb(188, 212, 233);
 }
-.form-wrapper
-{
-    width: 380px;
-    height:400px;
-    background-color: rgb(155, 144, 165);
-    margin-top: -300px;
-    margin-left: 450px;
-    border-radius: 10px;   
+
+.reg-group {
+  margin-bottom: 20px;
 }
+
+.reg-group label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.reg-select {
+  max-width: 310px;
+  height: 35px;
+  margin-left: 20px;
+  padding: 10px;
+  border: 1px solid #4e3d3d;
+  border-radius: 6px;
+  background: #becbdd;
+}
+
+/*view*/
+/* view-student-wrapper - align content to left side */
+.view-student-wrapper {
+    /* margin-top: 250px;   */
+    font-family: Arial, sans-serif;
+    color:white;
+    /* min-height: 55vh; */
+    /* display: flex;
+    flex-direction: column;
+    align-items: flex-start;  */
+}
+
+/* Title styling, aligned left now instead of center */
+.view-student-wrapper h1 {
+    /* margin-bottom: 30px; */
+    color:#ccc;
+    font-size: 32px;
+    text-shadow: 2px 2px 5px rebeccapurple;
+    text-align: right;
+    /* background-color: #fff; */
+}
+
+/* Student table aligned to left side with some left margin */
+.view-student-wrapper .student-table {
+    width: 60%;
+    margin-left: 270px;
+    border-collapse: collapse;
+    color:black;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.view-student-wrapper .student-table th, 
+.view-student-wrapper .student-table td {
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 18px;
+    background:rgb(126, 117, 117);
+}
+
+.view-student-wrapper .student-table th {
+    background: white;
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+

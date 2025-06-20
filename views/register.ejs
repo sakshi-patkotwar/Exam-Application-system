@@ -4,25 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Student Register</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body
+        {
+            background-image: url("/laptop.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width:200vh;
+            height: 55vh;
+            display: flex;
+            justify-content: center; /* centers horizontally */
+            align-items: center; 
+        
+        }
+    .form-wrapper {
+        width: 350px;
+        height: 400px;
+        background: #f0f0f0;
+        margin-top:200px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px -2px #131212;
+        margin-left:150px;
+         
+        
+    }
+    .form-wrapper h4 {
+        color: #000;
+        margin-bottom: 15px;
+        margin-top: 0;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .form-wrapper label {
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-weight: bold;
+        margin-left: 20px;
+
+    }    
+    .form-wrapper .control,
+    .form-wrapper .reg-select {
+        width: 80%;
+        padding: 5px;  /* reduced padding */
+        margin-top: 9px;
+        border-radius: 5px;
+        margin-left: 38px;
+        border-radius:none;
+        border: none;
+        background-color:#cce0f5;
+         
+    }
+
+
+    .form-wrapper input[type="submit"] {
+        width: 70%;
+        padding: 5px;  /* reduced padding */
+        background: #007bff;
+        color: #ffffff;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 40px;
+        margin-left: 49px;
+    }
+    .form-wrapper input[type="submit"]:hover {
+        background: #0056b3;
+    }
+    .form-wrapper .msg {
+        color: red;
+        margin-top: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    </style>
 </head>
 <body>
-    <%- include("studentdashboard.ejs") %>
-
-    <br>
-
     <div class="form-wrapper">
+        <h4>Student Registration</h4>
+        <!-- <form name="frm" method="POST" action="/registerStudentFull"> -->
         <form name="frm" action="/register" method="POST">
-            <input type="text" name="name" value="" placeholder="Enter Name" class="control"/><br><br> 
-            <input type="text" name="email" value="" placeholder="Enter Email" class="control"/><br><br> 
-            <input type="text" name="contact" value="" placeholder="Enter Contact" class="control"/><br><br> 
-            <input type="text" name="username" value="" placeholder="Enter Username" class="control"/><br><br> 
-            <input type="password" name="password" value="" placeholder="Enter Password" class="control"/><br><br> 
-            <input type="submit" name="s" value="Register" class="control"/>
+
+            <label for="name"><strong>Name</strong></label>
+            <input type="text" name="sname" value="" placeholder="Enter Name" class="control"/>
+        
+            <label for="email"><strong>Email</strong></label>
+            <input type="text" name="semail" value="" placeholder="Enter Email" class="control"/>
+
+        
+            <label for="password"><strong>Password</strong></label>
+            <input type="password" name="spassword" value="" placeholder="Enter Password" class="control"/>
+
+            <label for="contact"><strong>Contact</strong></label>
+            <input type="text" name="scontact" value="" placeholder="Enter Contact" class="control"/>
+
+            <input type="submit" name="s" value="Register" />
+            </form>
+            <p style="font-weight:bold; text-align: center">
+                Already have an account? 
+                <a href="/studentlogin" style="color:#007bff; text-decoration:none">
+                Login
+                </a>
+            </p>
             <% if (msg) { %>
-                <p style="color: red;"><%= msg %></p>
+            <p style="color: red; font-weight: bold; text-align: center;"><%= msg %></p>
             <% } %>
-        </form>
+        
     </div>
 </body>
 </html>

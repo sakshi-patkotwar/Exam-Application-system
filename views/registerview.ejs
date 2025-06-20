@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Details</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    table {
+      width: 70%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #fff;
+      margin-right: 30px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #333;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .start-btn {
+      padding: 6px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .start-btn:hover {
+      background-color: #45a049;
+    }
+
+    .no-exams {
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <%- include("studentdashboard.ejs") %>
+
+  <h2>Welcome, <%= student.sname %></h2>
+
+  <% if (exams.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Exam Name</th>
+          <th>Course</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Total Marks</th>
+          <th>Passing Marks</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% exams.forEach((exam) => { %>
+          <tr>
+            <td><%= exam.exname %></td>
+            <td><%= exam.cname %></td>
+            <td><%= exam.date.toISOString().slice(0, 10) %></td>
+            <td><%= exam.starttime.slice(0, 5) %> - <%= exam.endtime.slice(0, 5) %></td>
+            <td><%= exam.totalmark %></td>
+            <td><%= exam.passingmark %></td>
+            <td>
+              <a class="start-btn" href="/start?cid=<%= exam.cid %>&schid=<%= exam.schid %>">Start Exam</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="no-exams">No exam registrations found.</p>
+  <% } %>
+</body>
+</html>

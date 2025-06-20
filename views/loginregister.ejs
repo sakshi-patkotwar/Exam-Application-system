@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Register</title>
+  <style>
+    .form-wrapper {
+      width: 350px;
+      background: #f0f0f0;
+      margin: 20px auto;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px -2px #000;
+    }
+    .form-wrapper h4 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .form-wrapper label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    .form-wrapper .control,
+    .form-wrapper .reg-select {
+      width: 80%;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .form-wrapper input[type="submit"] {
+      width: 80%;
+      padding: 5px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .form-wrapper input[type="submit"]:hover {
+      background: #0056b3;
+    }
+    .form-wrapper .msg {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .form-wrapper .msg.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <%- include("studentdashboard.ejs") %>
+  <div class="form-wrapper">
+    <h4>Student Exam Registration</h4>
+    <form action="/loginregister" method="POST">
+      <label for="sname">Name</label>
+      <input type="text" name="sname" class="control" value="<%= student?.sname || '' %>" readonly />
+
+      <label for="semail">Email</label>
+      <input type="email" name="semail" class="control" value="<%= student?.semail || '' %>" readonly />
+
+      <label for="spassword">Password</label>
+      <input type="password" name="spassword" class="control" value="<%= student?.spassword || '' %>" readonly />
+
+      <label for="scontact">Contact</label>
+      <input type="contact" name="scontact" class="control" value="<%= student?.scontact || '' %>" readonly />
+
+      <label for="schid">Exam Schedule</label>
+      <select name="schid" class="reg-select" required>
+        <option value="">Select Exam Schedule</option>
+        <% schedules.forEach(sch => { %>
+          <option value="<%= sch.schid %>">
+            <%= sch.cname.toUpperCase() %> - <%= sch.exname.toUpperCase() %>
+            (Date: <%= sch.date.toISOString().slice(0, 10) %> |
+            Time: <%= sch.starttime.slice(0, 5) %> - <%= sch.endtime.slice(0, 5) %>)
+          </option>
+        <% }) %>
+      </select>
+
+      <input type="submit" value="Register" />
+
+      <% if (msg) { %>
+        <p class="msg <%= msg.includes('Error') || msg.includes('required') || msg.includes('already') ? 'error' : '' %>">
+          <%= msg %>
+        </p>
+      <% } %>
+    </form>
+  </div>
+</body>
+</html>

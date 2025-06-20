@@ -7,10 +7,13 @@ const mysql=require("mysql2");
 const router = require("../src/routes/regrouts.js");
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+
 app.set("view engine", "ejs");
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(bodyParser.json());
 
 app.use(

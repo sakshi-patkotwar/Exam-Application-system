@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f9f9f9;
+    }
+    .timer-container {
+      font-size: 22px;
+      font-weight: bold;
+      color: #d9534f;
+      margin-bottom: 20px;
+      margin-left: 1000px;
+    }
+    .question {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #0275d8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #025aa5;
+    }
+  </style>
+</head>
+<body>
+
+    <div class="timer-container">
+    ⏳ Time Remaining: <span id="time">Loading...</span>
+  </div>
+
+  <form action="/submitexam" method="POST">
+    <% questions.forEach((q, index) => { %>
+      <div class="question">
+        <h4><%= index + 1 %>. <%= q.qname %></h4>
+        <label><input type="radio" name="answer<%= q.qid %>" value="<%= q.op1 %>" required> <%= q.op1 %></label>
+        <label><input type="radio" name="answer<%= q.qid %>" value="<%= q.op2 %>"> <%= q.op2 %></label>
+        <label><input type="radio" name="answer<%= q.qid %>" value="<%= q.op3 %>"> <%= q.op3 %></label>
+        <label><input type="radio" name="answer<%= q.qid %>" value="<%= q.op4 %>"> <%= q.op4 %></label>
+      </div>
+    <% }) %>
+
+    <input type="hidden" name="cid" value="<%= schedule.cid %>">
+    <input type="hidden" name="schid" value="<%= schedule.schid %>">
+    <button type="submit">Submit Exam</button>
+  </form>
+
+ <script>
+let timeLeft =60* 60 ;
+  const timerDisplay = document.getElementById('time');
+
+  function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      alert("Time is up! Submitting your exam.");
+      document.querySelector("form").submit();
+    }
+
+    timeLeft--;
+  }
+
+  updateTimer();
+  const timerInterval = setInterval(updateTimer, 1000);
+</script>
+
+</body>
+</html>

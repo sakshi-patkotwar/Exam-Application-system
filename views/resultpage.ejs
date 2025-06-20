@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .result-container {
+      width: 95%;
+      max-width: 1000px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1a73e8;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #1a73e8;
+      color: white;
+      font-size: 14px;
+    }
+
+    .student-info {
+      background-color: #f9f9f9;
+      text-align: left;
+      font-weight: bold;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+
+    .incorrect {
+      color: red;
+      font-weight: bold;
+    }
+
+    .home-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 18px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<a class="home-link" href="/home">🏠 Home</a>
+
+<div class="result-container">
+  <h2>Exam Result Report</h2>
+
+  <table>
+    <!-- Row 1: Student Info (1 or 2 lines only) -->
+    <tr class="student-info">
+      <td colspan="6">
+        Name: <%= student.sname %> &nbsp;&nbsp; | &nbsp;&nbsp;
+        Email: <%= student.semail %> &nbsp;&nbsp; | &nbsp;&nbsp;
+        Correct: <%= correct %> / <%= total %> &nbsp;&nbsp; | &nbsp;&nbsp;
+        Incorrect: <%= incorrect %> &nbsp;&nbsp; | &nbsp;&nbsp;
+        Time Taken: <%= timeTaken %>
+      </td>
+    </tr>
+
+    <!-- Header row for questions -->
+    <tr>
+      <th>Q.No</th>
+      <th>Question</th>
+      <th>Your Answer</th>
+      <th>Correct Answer</th>
+      <th>Result</th>
+    </tr>
+
+    <!-- Dynamic rows for each question -->
+    <% results.forEach((r, index) => { %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= r.question %></td>
+        <td><%= r.selectedAnswer %></td>
+        <td><%= r.correctAnswer %></td>
+        <td class="<%= r.isCorrect ? 'correct' : 'incorrect' %>">
+          <%= r.isCorrect ? 'Correct' : 'Incorrect' %>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+</div>
+
+</body>
+</html>
