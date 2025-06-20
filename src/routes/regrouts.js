@@ -2,6 +2,11 @@ let routes=require("express");
 let regCtrl=require("../controllers/regCtrl.js");
 let router=routes.Router();
 
+router.get("/", (req, res) => {
+    res.render("frontpage");  // Make sure frontpage.ejs exists in /views
+});
+
+
 router.get("/",regCtrl.navbar);
 router.get("/adminlogin",regCtrl.adminlog);
 router.post("/adminlogin",regCtrl.adminlogin);
@@ -49,5 +54,6 @@ router.post("/schedule/update/:schid", regCtrl.updateSchedule);
 
 router.post("/schedule/add",regCtrl.scheduleAdd);
 
+router.get("/logout",regCtrl.adminlogout);
 module.exports = router;
 

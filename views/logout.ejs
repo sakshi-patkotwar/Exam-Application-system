@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logged Out</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url("/images/laptop.jpg") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* height: 100vh; */
+      flex-direction: column;
+    }
+
+    .logout-box {
+      background-color: rgba(200, 180, 220, 0.9); /* light purple with opacity */
+      padding: 30px 40px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .logout-box h1 {
+      font-size: 2.5rem;
+      color: #000;
+      margin-bottom: 80px;
+      text-align: center;
+      margin-right: 135px;
+    }
+
+    .logout-box p {
+      font-size: 1.1rem;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    .logout-box a {
+      background-color: #d0e4ff;
+      color: black;
+      padding: 10px 20px;
+      border: 2px solid black;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .logout-box a:hover {
+      background-color: #9dc9ff;
+    }
+  </style>
+</head>
+<body>
+  <%- include("nav.ejs") %>
+  <div class="logout-box">
+    <h1>Logged out<br>Successfully</h1>
+    <p>Thank You For using Exam Application System</p>
+    <a href="/adminlogin">Login Again</a>
+  </div>
+</body>
+</html>

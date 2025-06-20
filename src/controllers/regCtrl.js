@@ -319,12 +319,6 @@ exports.updateSchedule = (req, res) => {
   });
 };
 
-exports.adminlogout=(req,res)=>{
-    req.session.destroy(err=>{
-        if(err) return res.send("logout error");
-        res.redirect("/adminlogin");
-    });
-};
 
 exports.studenthome = (req, res) => {
   if (!req.session.student) {
@@ -332,3 +326,15 @@ exports.studenthome = (req, res) => {
   }
   res.render("studentDashboard.ejs", { student: req.session.student });
 };
+
+
+exports.adminlogout=(req,res)=>{
+    req.session.destroy(err=>{
+        if(err) return res.send("logout error");
+        res.render("logout.ejs");
+    });
+};
+
+// exports.adminlogout=(req,res)=>{
+//   res.render("logout.ejs");
+// }

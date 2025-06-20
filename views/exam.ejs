@@ -103,6 +103,34 @@
     font-weight: bold;
     cursor: pointer;
   }
+  #pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.page-btn {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.page-btn.active {
+    background-color: #0056b3;
+}
+
+.page-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.page-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
 </style>
 </head>
 <body>
@@ -110,7 +138,7 @@
     <div class="content">
     <div class="left-box">
      <h2>Exam List</h2>
-    <table class="styled-table">
+    <table class="styled-table" id="exam">
   <thead>
     <tr>
       <th>Exam ID</th>
@@ -134,13 +162,101 @@
     <% }) %>
   </tbody>
 </table>
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div id="pagination"></div>
+<!-- Pagination Script -->
+<script>
+$(document).ready(function () {
+    const rowsPerPage = 3;
+    const rows = $('#exam tbody tr');
+    const rowsCount = rows.length;
+    const pageCount = Math.ceil(rowsCount / rowsPerPage);
+    let currentPage = 1;
+
+    function renderPagination() {
+        $('#pagination').empty();
+
+        if (pageCount > 1) {
+            $('#pagination').append(`<button class="page-btn prev-btn" ${currentPage === 1 ? 'disabled' : ''}>Prev</button>`);
+
+            for (let i = 1; i <= pageCount; i++) {
+                $('#pagination').append(`<button class="page-btn num-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`);
+            }
+
+            $('#pagination').append(`<button class="page-btn next-btn" ${currentPage === pageCount ? 'disabled' : ''}>Next</button>`);
+        }
+    }
+
+    function showPage(page) {
+        currentPage = page;
+
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        rows.hide();
+        rows.slice(start, end).show();
+
+        renderPagination();
+    }
+
+    // Initial render
+    showPage(currentPage);
+
+    // Click handlers
+    $('#pagination').on('click', '.num-btn', function () {
+        const pageNum = parseInt($(this).data('page'));
+        showPage(pageNum);
+    });
+
+    $('#pagination').on('click', '.prev-btn', function () {
+        if (currentPage > 1) showPage(currentPage - 1);
+    });
+
+    $('#pagination').on('click', '.next-btn', function () {
+        if (currentPage < pageCount) showPage(currentPage + 1);
+    });
+});
+
+
+  function totalMarkValidate(input) {
+      const value = input.value.trim();
+      const span = document.getElementById("totalmark-msg");
+
+      // Regex to allow only digits
+      const isValid = /^\d+$/.test(value);
+
+      if (!isValid) {
+          span.innerHTML = " Only numeric digits (0-9) are allowed.";
+          span.style.color = "red";
+      } else {
+          span.innerHTML = "";
+      }
+
+      return isValid;
+  }
+
+  // Prevent form submit if validation fails
+  function validateForm(event) {
+      const totalMarkInput = document.forms["frm"]["totalmark"];
+      const isTotalValid = totalMarkValidate(totalMarkInput);
+
+      if (!isTotalValid) {
+          event.preventDefault(); // Stop form submission
+      }
+  }
+
+
+</script>
 </div>
     <div class="add-exam-form right-box">
         <h2> Exam Form</h2>
-        <form name="frm" action="/addexam" method="POST">
+        <form name="frm" action="/addexam" method="POST" onsubmit="return validateForm(event)">
+          <span id="cmsg"></span>
             <input type="text" name="exname" value="" placeholder="Enter Exam Name" class="control"/><br><br> 
-            <input type="text" name="totalmark" value="" placeholder="Enter Total Marks" class="control"/><br><br> 
-            <input type="text" name="passingmark" value="" placeholder="Enter Passing Marks" class="control"/><br><br> 
+            <input type="text" name="totalmark" value="" placeholder="Enter Total Marks" class="control" onblur="totalMarkValidate(this.value)" />
+            <span id="totalmark-msg"></span><br><br> 
+            <input type="text" name="passingmark" value="" placeholder="Enter Passing Marks" class="control" /><br><br> 
             <button type="submit">Submit Exam</button>
         </form>
     </div>

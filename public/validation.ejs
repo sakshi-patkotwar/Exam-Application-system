@@ -1,0 +1,39 @@
+let totalMarkValidate=true;
+
+let totalMarkValidate = (str) => {
+    let isValid = true;
+    let span = document.getElementById("totalmark-msg");
+
+    // Check if string is empty
+    if (str.length === 0) {
+        isValid = false;
+    } else {
+        for (let i = 0; i < str.length; i++) {
+            let code = str.charCodeAt(i);
+            if (!(code >= 48 && code <= 57)) {
+                isValid = false;
+                break;
+            }
+        }
+    }
+
+    // Show validation message
+    if (isValid) {
+        span.innerHTML = "";
+        span.style.color = "white";
+    } else {
+        span.innerHTML = "Invalid mark. Please enter numbers only.";
+        span.style.color = "red";
+    }
+
+    return isValid;
+};
+
+function submitForm()
+{
+    if(totalmark.length==0)
+    {
+        totalMarkValidate=false;
+    }
+    return totalMarkValidate;
+}
